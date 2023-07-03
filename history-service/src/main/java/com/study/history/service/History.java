@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
     private long memberId;
     private long bookId;
     private int quantity;
