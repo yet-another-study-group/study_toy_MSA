@@ -12,7 +12,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class GlobalExceptionHandler {
     @ExceptionHandler(TestException.class)
     @ResponseStatus(BAD_REQUEST)
-    public ApiResponse<?> handleCocktailException(TestException ex) {
+    public ApiResponse<?> handleMockException(TestException ex) {
         return ApiResponse.notContent(ex.getTestRtnConsts(), ex.getMessage());
     }
 }

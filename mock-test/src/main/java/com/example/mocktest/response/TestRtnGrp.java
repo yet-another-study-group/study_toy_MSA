@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 public enum TestRtnGrp {
     Success(200),
     Validation(400);
+
     private int statsCode;
 }
 

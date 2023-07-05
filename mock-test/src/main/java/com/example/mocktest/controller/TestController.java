@@ -17,6 +17,7 @@ public class TestController {
     public int getMemberQuantity(@PathVariable long memberId) {
         return testService.getRentalQuantity(memberId);
     }
+
     @GetMapping("/test/book/{bookId}")
     public int getBookQuantity(@PathVariable long bookId) {
         return testService.getBookQuantity(bookId);

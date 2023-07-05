@@ -23,6 +23,7 @@ public class TestService {
             throw new TestException(TestRtnConsts.ERR400);
         }
     }
+
     public int getBookQuantity(long bookId) {
         if (this.bookId == bookId) {
             return bookQuantity;
