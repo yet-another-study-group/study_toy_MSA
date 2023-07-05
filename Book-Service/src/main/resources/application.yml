@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    show-sql: true
+#    ?? ????? properies ?? ????
+    properties:
+      hibernate:
+        ddl-auto: create
+        format_sql: true
+#      dml ?? ?? ???? ????
+    defer-datasource-initialization: true
+# dml, ddl ?? ?? ???? ????
+  sql:
+    init:
+      mode: always
