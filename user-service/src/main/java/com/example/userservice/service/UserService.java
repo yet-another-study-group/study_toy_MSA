@@ -25,8 +25,8 @@ public class UserService {
 
     public RentalRightResponse checkRentalRight(String email){
         User user=findUserByUserEmail(email);
-        //int bookQuantity=historyApi.getRentalBookQuantity(user.getId());
-        int bookQuantity=1;
+        int bookQuantity=historyApi.getRentalBookQuantity(user.getId());
+
         if(isAvailableRental(bookQuantity)){
             return RentalRightResponse.of(RentalRight.RENTAL_AVAILABLE);
         }else{

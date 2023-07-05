@@ -15,7 +15,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
     database: mysql
     properties:
@@ -24,3 +24,8 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL5Dialect
     defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data-init.sql
