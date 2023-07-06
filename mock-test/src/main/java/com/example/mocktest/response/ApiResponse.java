@@ -14,6 +14,15 @@ public class ApiResponse<T> {
     private final int code;
     private final T data;
 
+    public static <T> ApiResponse<T> ok(T data) {
+        return new ApiResponse<>(
+                TestRtnConsts.SCC200,
+                TestRtnConsts.SCC200.getDescription(),
+                TestRtnConsts.SCC200.getCode(),
+                data
+        );
+    }
+
     public static <T> ApiResponse<T> notContent(TestRtnConsts status, String message) {
 
         return new ApiResponse<>(

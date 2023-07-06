@@ -5,31 +5,37 @@ import com.example.mocktest.response.TestRtnConsts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 public class TestService {
     @Value("${memberId}")
     private long memberId;
-    @Value("${rentalQuantity}")
-    private int rentalQuantity;
+    @Value("${quantity}")
+    private int quantity;
+    @Value("${bookIds}")
+    private List<Long> bookIds;
     @Value("${bookId}")
-    private long bookId;
-    @Value("${bookQuantity}")
-    private int bookQuantity;
+    private Long bookId;
+    @Value("${stock}")
+    private int stock;
 
-    public int getRentalQuantity(long memberId) {
-        if (this.memberId == memberId) {
-            return rentalQuantity;
-        } else {
-            throw new TestException(TestRtnConsts.ERR400);
+    public Map<String, Object> getRentalQuantity(long memberId) {
+        if (this.memberId != memberId) throw new TestException(TestRtnConsts.ERR400);
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("memberId", this.memberId);
+        response.put("quantity", this.quantity);
+        response.put("bookId", bookIds);
+        return response;
+        }
+
+    public Map<String, Object> getBookQuantity(long bookId) {
+        if (this.bookId != bookId) throw new TestException(TestRtnConsts.ERR401);
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("bookId", this.bookId);
+        response.put("stock", this.stock);
+        return response;
         }
     }
 
-    public int getBookQuantity(long bookId) {
-        if (this.bookId == bookId) {
-            return bookQuantity;
-        } else {
-            throw new TestException(TestRtnConsts.ERR401);
-        }
-    }
-}
 
