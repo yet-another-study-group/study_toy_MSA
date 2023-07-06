@@ -14,7 +14,6 @@ public class BookController {
 
     @GetMapping("/book/verify/{book-id}")
     public boolean checkBookStock(@PathVariable("book-id") long bookId) {
-        boolean pass = bookService.verify(bookId);
-        return pass;
+        return bookService.verify(bookId);
     }
 }

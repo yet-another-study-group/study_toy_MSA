@@ -1,11 +1,15 @@
 package com.study.Book.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BookService {
     private final BookRepository bookRepository;
     private final HistoryFeign historyFeign;
@@ -13,30 +17,27 @@ public class BookService {
     @Transactional
     public boolean verify(long bookId) {
         exceptionCheck(bookId);
-        int borrowedBooks = historyFeign.getBookQuantity(bookId);
+        int borrowedBooks = historyFeign.getBorrowedBookCount(bookId);
         int stock = findBookStock(bookId);
-        boolean pass = checkBookStock(borrowedBooks, stock);
-        return pass;
+        return stock != borrowedBooks;
     }
 
-
     private void exceptionCheck(long bookId) {
-        if (!bookRepository.existsById(bookId)) {
-            throw new IllegalArgumentException();
+        if (bookId == 0) {
+            NullPointerException e = new NullPointerException();
+            e.printStackTrace();
+            log.error("NullPointerException ERROR: {}", e.getMessage());
+            throw e;
+        }
+        else if (!bookRepository.existsById(bookId)) {
+            EntityNotFoundException e = new EntityNotFoundException();
+            e.printStackTrace();
+            log.error("EntityNotFoundException: {}", e.getMessage());
+            throw e;
         }
     }
 
     private int findBookStock(long bookId) {
-        int stock = bookRepository.findStockById(bookId);
-        return stock;
-    }
-
-    private boolean checkBookStock(int borrowedBooks, int stock) {
-        if (borrowedBooks == stock ) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return bookRepository.findStockById(bookId);
     }
 }
