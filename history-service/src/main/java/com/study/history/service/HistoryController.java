@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class HistoryController {
     private final HistoryService historyService;
 
-    @GetMapping("/history/{memberId}")
+    @GetMapping("/histories/{memberId}")
     public ResponseEntity<RentalResponse> sendRentalRecords(@PathVariable long memberId) {
-        RentalResponse response = historyService.getRentalRecords(memberId);
-        return ResponseEntity.ok(response);
+        RentalResponse rentalRecords = historyService.getRentalRecords(memberId);
+        return ResponseEntity.ok(rentalRecords);
     }
 }

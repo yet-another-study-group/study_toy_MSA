@@ -3,10 +3,7 @@ package com.study.history.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.persistence.EntityNotFoundException;
-
 
 @Service
 @RequiredArgsConstructor
@@ -16,12 +13,8 @@ public class HistoryService {
     public RentalResponse getRentalRecords(long memberId) {
         checkMemberId(memberId);
         List<History> rentalRecords = getHistories(memberId);
-        List<RentalResponse.RentalRecord> rentalRecordList = rentalRecords.stream()
-                .map(record -> new RentalResponse.RentalRecord(record.getMemberId(), record.getBookId(), record.getQuantity()))
-                .collect(Collectors.toList());
-        return RentalResponse.of(rentalRecordList);
+        return RentalResponse.of(rentalRecords);
     }
-
 
     private void checkMemberId(long memberId) {
         List<History> rentalRecords = getHistories(memberId);
