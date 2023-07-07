@@ -1,5 +1,7 @@
-package com.study.history.service;
+package com.study.history.service.controller;
 
+import com.study.history.service.response.RentalResponse;
+import com.study.history.service.service.HistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

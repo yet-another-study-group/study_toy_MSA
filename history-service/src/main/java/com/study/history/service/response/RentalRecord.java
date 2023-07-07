@@ -1,5 +1,6 @@
-package com.study.history.service;
+package com.study.history.service.response;
 
+import com.study.history.service.domain.History;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

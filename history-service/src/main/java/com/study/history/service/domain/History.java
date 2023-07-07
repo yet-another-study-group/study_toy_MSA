@@ -1,4 +1,4 @@
-package com.study.history.service;
+package com.study.history.service.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
     private long id;
     @Column(nullable = false)
     private long userId;
