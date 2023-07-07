@@ -1,6 +1,5 @@
 package com.study.history.service.service;
 
-import com.study.history.service.response.exception.ExceptionResponse;
 import com.study.history.service.domain.History;
 import com.study.history.service.response.RentalResponse;
 import com.study.history.service.repository.HistoryRepository;
