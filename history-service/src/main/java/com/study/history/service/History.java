@@ -13,7 +13,7 @@ public class History {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false)
-    private long memberId;
+    private long userId;
     @Column(nullable = false)
     private long bookId;
     @Column(nullable = false)

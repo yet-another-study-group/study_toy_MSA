@@ -10,28 +10,27 @@ import javax.persistence.EntityNotFoundException;
 public class HistoryService {
     private final HistoryRepository historyRepository;
 
-    public RentalResponse getRentalRecords(long memberId) {
-        checkMemberId(memberId);
-        List<History> rentalRecords = getHistories(memberId);
-        return RentalResponse.of(rentalRecords);
+    public RentalResponse getRentalRecords(long userId) {
+        checkUserId(userId);
+        return RentalResponse.of(getUserIdRecords(userId));
     }
 
-    private void checkMemberId(long memberId) {
-        List<History> rentalRecords = getHistories(memberId);
+    private void checkUserId(long userId) {
+        getUserIdRecords(userId);
 
-        if (memberId == 0) {
+        if (userId == 0) {
             NullPointerException e = new NullPointerException();
             e.printStackTrace();
             throw e;
         }
-        else if (rentalRecords.isEmpty()) {
+        else if (getUserIdRecords(userId).isEmpty()) {
             EntityNotFoundException e = new EntityNotFoundException();
             e.printStackTrace();
             throw e;
         }
     }
 
-    private List<History> getHistories(long memberId) {
-        return historyRepository.findByMemberId(memberId);
+    private List<History> getUserIdRecords(long userId) {
+        return historyRepository.findByUserId(userId);
     }
 }

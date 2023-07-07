@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalResponse {
-    private List<RentalRecord> rentalRecords;
+    private List<RentalRecord> UserRentalRecords;
 
         public static RentalResponse of(List<History> rentalRecords) {
             List<RentalRecord> rentalRecordList = rentalRecords.stream()
