@@ -40,9 +40,8 @@ public class UserService {
 
     public RentalRightResponse checkRentalRight(String email) {
         User user = findUserByUserEmail(email);
-
-        ArrayList<HistoryData> dataList=convertToHistoryData(historyApi.getUserHistory(user.getId()));
-        int bookQuantity = countRentalBooks(dataList);
+        HistoryApiResponse response=historyApi.getUserHistory(user.getId());
+        int bookQuantity = countRentalBooks(response.getRentalRecords());
 
         if (isAvailableRental(bookQuantity)) {
             return RentalRightResponse.of(RentalRight.RENTAL_AVAILABLE);
@@ -57,17 +56,6 @@ public class UserService {
                 .sum();
 
         return count;
-    }
-
-    private ArrayList<HistoryData> convertToHistoryData(HistoryApiResponse historyApiResponse){
-        Gson gson = new Gson();
-        HistoryData[] historyDataArray = gson.fromJson(historyApiResponse.getRentalRecords().toString(), HistoryData[].class);
-
-        ArrayList<HistoryData> historyList = new ArrayList<>();
-        Arrays.stream(historyDataArray)
-                .forEach(e -> historyList.add(e));
-
-        return historyList;
     }
 
     private boolean isAvailableRental(int quantity) {
