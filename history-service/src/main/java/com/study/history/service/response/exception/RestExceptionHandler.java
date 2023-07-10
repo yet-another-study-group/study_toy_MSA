@@ -5,11 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.EntityNotFoundException;
+
 @RestControllerAdvice
 public class RestExceptionHandler {
-    @ExceptionHandler(UserIdException.class)
-    public ResponseEntity<ExceptionResponse> handleUserIdException(UserIdException ex) {
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleUserEntityNotFoundException(EntityNotFoundException ex) {
         ExceptionResponse response = new ExceptionResponse(ex.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 }
+

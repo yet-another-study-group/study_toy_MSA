@@ -1,6 +1,5 @@
 package com.study.history.service.response.exception;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
