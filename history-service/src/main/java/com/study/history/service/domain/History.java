@@ -19,4 +19,10 @@ public class History {
     private long bookId;
     @Column(nullable = false)
     private int quantity;
+
+    public History(long userId, long bookId, int quantity) {
+        this.userId = userId;
+        this.bookId = bookId;
+        this.quantity = quantity;
+    }
 }
