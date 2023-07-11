@@ -71,15 +71,7 @@ class BookServiceTest {
         when(bookRepository.existsById(anyLong())).thenReturn(false);
 
         assertThrows(EntityNotFoundException.class, () -> {
-            bookService.verify(80);
-        });
-    }
-
-    @Test
-    @DisplayName("BookId 값이 0 일때")
-    void test4() {
-        assertThrows(NullPointerException.class, () -> {
-            bookService.verify(0);
+            bookService.verify(anyLong());
         });
     }
 }

@@ -16,28 +16,11 @@ public class BookService {
 
     @Transactional
     public boolean verify(long bookId) {
-        exceptionCheck(bookId);
+        if (!bookRepository.existsById(bookId)) {
+            throw new EntityNotFoundException("book not found with id");
+        }
         int borrowedBooks = historyFeign.getBorrowedBookCount(bookId);
-        int stock = findBookStock(bookId);
-        return stock != borrowedBooks;
-    }
-
-    private void exceptionCheck(long bookId) {
-        if (bookId == 0) {
-            NullPointerException e = new NullPointerException();
-            e.printStackTrace();
-            log.error("NullPointerException ERROR: {}", e.getMessage());
-            throw e;
-        }
-        else if (!bookRepository.existsById(bookId)) {
-            EntityNotFoundException e = new EntityNotFoundException();
-            e.printStackTrace();
-            log.error("EntityNotFoundException: {}", e.getMessage());
-            throw e;
-        }
-    }
-
-    private int findBookStock(long bookId) {
-        return bookRepository.findStockById(bookId);
+        int stock = bookRepository.findStockById(bookId);
+        return stock > borrowedBooks;
     }
 }
