@@ -29,12 +29,11 @@ class BookServiceTest {
     @Test
     @DisplayName("책 대여 가능 여부 성공")
     void test1() {
-        long bookId = 2;
-        when(historyFeign.getBorrowedBookCount(bookId)).thenReturn(2);
-        when(bookRepository.findStockById(bookId)).thenReturn(5);
-        when(bookRepository.existsById(bookId)).thenReturn(true);
+        when(historyFeign.getBorrowedBookCount(anyLong())).thenReturn(2);
+        when(bookRepository.findStockById(anyLong())).thenReturn(5);
+        when(bookRepository.existsById(anyLong())).thenReturn(true);
 
-        boolean pass = bookService.verify(bookId);
+        boolean pass = bookService.verify(anyLong());
 
         assertThat(pass).isEqualTo(true);
     }
@@ -42,12 +41,11 @@ class BookServiceTest {
     @Test
     @DisplayName("책 대여 가능 여부 성공2")
     void test1_2() {
-        long bookId = 2;
-        when(historyFeign.getBorrowedBookCount(bookId)).thenReturn(4);
-        when(bookRepository.findStockById(bookId)).thenReturn(5);
-        when(bookRepository.existsById(bookId)).thenReturn(true);
+        when(historyFeign.getBorrowedBookCount(anyLong())).thenReturn(4);
+        when(bookRepository.findStockById(anyLong())).thenReturn(5);
+        when(bookRepository.existsById(anyLong())).thenReturn(true);
 
-        boolean pass = bookService.verify(bookId);
+        boolean pass = bookService.verify(anyLong());
 
         assertThat(pass).isEqualTo(true);
     }
@@ -55,12 +53,11 @@ class BookServiceTest {
     @Test
     @DisplayName("책 대여 가능 여부 실패")
     void test2() {
-        long bookId = 2;
-        when(historyFeign.getBorrowedBookCount(bookId)).thenReturn(5);
-        when(bookRepository.findStockById(bookId)).thenReturn(5);
-        when(bookRepository.existsById(bookId)).thenReturn(true);
+        when(historyFeign.getBorrowedBookCount(anyLong())).thenReturn(5);
+        when(bookRepository.findStockById(anyLong())).thenReturn(5);
+        when(bookRepository.existsById(anyLong())).thenReturn(true);
 
-        boolean pass = bookService.verify(bookId);
+        boolean pass = bookService.verify(anyLong());
 
         assertThat(pass).isEqualTo(false);
     }
