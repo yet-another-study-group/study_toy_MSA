@@ -1,13 +1,11 @@
 package com.example.userservice.service;
 
-import com.example.userservice.constants.RentalRight;
 import com.example.userservice.entity.User;
 import com.example.userservice.historyApi.HistoryApi;
 import com.example.userservice.repository.UserRepository;
 import com.example.userservice.response.HistoryApiResponse;
 import com.example.userservice.response.HistoryData;
 import com.example.userservice.response.RentalRightResponse;
-import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor
@@ -28,25 +25,23 @@ public class UserService {
     public static final int LIMITED_RENTAL_BOOK_COUNT=3;
 
     public void registration(String email, String password) {
-        checkEmailExists(email);
+        if(userRepository.existsUserByEmail(email))
+            throw new EntityExistsException();
         User newUser = User.of(email, password);
         userRepository.save(newUser);
     }
 
-    private void checkEmailExists(String email){
-        if(userRepository.existsUserByEmail(email))
-            throw new EntityExistsException();
-    }
-
     public RentalRightResponse checkRentalRight(String email) {
-        User user = findUserByUserEmail(email);
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException());
         HistoryApiResponse response=historyApi.getUserHistory(user.getId());
         int bookQuantity = countRentalBooks(response.getRentalRecords());
 
-        if (isAvailableRental(bookQuantity)) {
-            return RentalRightResponse.of(RentalRight.RENTAL_AVAILABLE);
+        if (bookQuantity < LIMITED_RENTAL_BOOK_COUNT) {
+            log.debug("대여 가능");
+            return RentalRightResponse.of(true);
         } else {
-            return RentalRightResponse.of(RentalRight.RENTAL_NOT_AVAILABLE);
+            log.debug("대여 불가능");
+            return RentalRightResponse.of(false);
         }
     }
 
@@ -56,19 +51,6 @@ public class UserService {
                 .sum();
 
         return count;
-    }
-
-    private boolean isAvailableRental(int quantity) {
-        if (quantity < LIMITED_RENTAL_BOOK_COUNT) {
-            return true;
-        }
-        return false;
-    }
-
-    private User findUserByUserEmail(String email) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException());
-
-        return user;
     }
 
 }
