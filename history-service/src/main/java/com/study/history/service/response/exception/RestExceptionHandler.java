@@ -9,10 +9,9 @@ import javax.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ExceptionResponse> handleUserEntityNotFoundException(EntityNotFoundException ex) {
-        ExceptionResponse response = new ExceptionResponse(ex.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    @ExceptionHandler
+    public ResponseEntity<String> handleUserEntityNotFoundException(EntityNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
 
