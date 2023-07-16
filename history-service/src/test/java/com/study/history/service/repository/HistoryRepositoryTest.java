@@ -22,14 +22,28 @@ class HistoryRepositoryTest {
     @DisplayName("저장된 userId 기록이 제대로 조회되는지 확인")
     void findAllByUserIdTest() {
         // when
-        List<History> UserRentalRecords = historyRepository.findAllByUserId(2L);
+        List<History> userRentalRecords = historyRepository.findAllByUserId(2L);
         // then
-        assertThat(UserRentalRecords).isNotNull();
-        assertThat(UserRentalRecords).hasSize(2);
-        assertThat(UserRentalRecords.get(0).getBookId()).isEqualTo(2L);
-        assertThat(UserRentalRecords.get(1).getQuantity()).isEqualTo(1);
-        assertThat(UserRentalRecords.get(1).getQuantity()).isEqualTo(1L);
-        assertThat(UserRentalRecords.get(1).getQuantity()).isEqualTo(1);
+        assertThat(userRentalRecords).isNotNull();
+        assertThat(userRentalRecords).hasSize(2);
+        assertThat(userRentalRecords.get(0).getBookId()).isEqualTo(2L);
+        assertThat(userRentalRecords.get(0).getQuantity()).isEqualTo(1);
+        assertThat(userRentalRecords.get(1).getBookId()).isEqualTo(1L);
+        assertThat(userRentalRecords.get(1).getQuantity()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("저장된 bookId 기록이 제대로 조회되는지 확인")
+    void findAllByBookIdTest() {
+        // when
+        List<History> bookStockRecords = historyRepository.findAllByBookId(1L);
+        // then
+        assertThat(bookStockRecords).isNotNull();
+        assertThat(bookStockRecords).hasSize(2);
+        assertThat(bookStockRecords.get(0).getUserId()).isEqualTo(1L);
+        assertThat(bookStockRecords.get(0).getQuantity()).isEqualTo(1);
+        assertThat(bookStockRecords.get(1).getUserId()).isEqualTo(2L);
+        assertThat(bookStockRecords.get(1).getQuantity()).isEqualTo(1);
     }
 
     @Test
