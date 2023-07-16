@@ -9,5 +9,4 @@ public class HistoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HistoryServiceApplication.class, args);
 	}
-
 }
