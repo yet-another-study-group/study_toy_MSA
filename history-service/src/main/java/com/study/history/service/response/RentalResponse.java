@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalResponse {
-    private List<RentalRecord> UserRentalRecords;
+    private List<RentalRecord> userRentalRecords;
 
-        public static RentalResponse of(List<History> rentalRecords) {
-            List<RentalRecord> rentalRecordList = rentalRecords.stream()
-                    .map(RentalRecord::of)
-                    .collect(Collectors.toList());
-            return new RentalResponse(rentalRecordList);
-        }
- }
+    public static RentalResponse of(List<History> rentalRecords) {
+        List<RentalRecord> rentalRecordList = rentalRecords.stream()
+                .map(RentalRecord::of)
+                .collect(Collectors.toList());
+        return new RentalResponse(rentalRecordList);
+    }
+}
