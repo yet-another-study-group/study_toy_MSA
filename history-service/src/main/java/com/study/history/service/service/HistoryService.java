@@ -1,5 +1,6 @@
 package com.study.history.service.service;
 
+import com.study.history.service.entity.History;
 import com.study.history.service.response.RentalResponse;
 import com.study.history.service.repository.HistoryRepository;
 import com.study.history.service.response.StockResponse;
@@ -31,6 +32,10 @@ public class HistoryService {
             throw new EntityNotFoundException("해당 Book Id를 찾을 수 없습니다.");
         }
         return StockResponse.of(historyRepository.findAllByBookId(bookId));
+    }
+
+    public void saveLoanRecord(long userId, long bookId, int quantity) {
+        historyRepository.save(new History(userId, bookId, quantity));
     }
 }
 

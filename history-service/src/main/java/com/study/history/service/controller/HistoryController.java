@@ -5,10 +5,7 @@ import com.study.history.service.response.StockResponse;
 import com.study.history.service.service.HistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -26,5 +23,10 @@ public class HistoryController {
     public ResponseEntity<StockResponse> sendStockRecords(@PathVariable long bookId) {
         StockResponse stockRecords = historyService.getStockRecords(bookId);
         return ResponseEntity.ok(stockRecords);
+    }
+
+    @PostMapping("/histories/loan/save")
+    public void saveLoanRecord(@RequestParam long userId, @RequestParam long bookId, @RequestParam int quantity) {
+        historyService.saveLoanRecord(userId, bookId, quantity);
     }
 }
