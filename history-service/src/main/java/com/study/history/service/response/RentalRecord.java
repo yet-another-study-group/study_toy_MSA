@@ -1,11 +1,10 @@
 package com.study.history.service.response;
 
-import com.study.history.service.domain.History;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.study.history.service.entity.History;
+import lombok.*;
 
 @Getter
+@Setter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalRecord {
     private long bookId;

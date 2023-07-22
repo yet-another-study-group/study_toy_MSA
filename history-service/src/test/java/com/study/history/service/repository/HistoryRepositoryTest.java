@@ -1,6 +1,6 @@
 package com.study.history.service.repository;
 
-import com.study.history.service.domain.History;
+import com.study.history.service.entity.History;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

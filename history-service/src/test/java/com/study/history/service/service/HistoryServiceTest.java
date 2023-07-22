@@ -1,6 +1,6 @@
 package com.study.history.service.service;
 
-import com.study.history.service.domain.History;
+import com.study.history.service.entity.History;
 import com.study.history.service.repository.HistoryRepository;
 import com.study.history.service.response.RentalRecord;
 import com.study.history.service.response.RentalResponse;

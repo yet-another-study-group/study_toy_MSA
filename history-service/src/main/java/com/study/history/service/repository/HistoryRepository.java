@@ -1,6 +1,6 @@
 package com.study.history.service.repository;
 
-import com.study.history.service.domain.History;
+import com.study.history.service.entity.History;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.study.history.service.response;
 
-import com.study.history.service.domain.History;
+import com.study.history.service.entity.History;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,10 +12,11 @@ import java.util.stream.Collectors;
 public class RentalResponse {
     private List<RentalRecord> userRentalRecords;
 
-    public static RentalResponse of(List<History> rentalRecords) {
-        List<RentalRecord> rentalRecordList = rentalRecords.stream()
-                .map(RentalRecord::of)
-                .collect(Collectors.toList());
-        return new RentalResponse(rentalRecordList);
+    public static RentalResponse of(List<History> userRentalRecords) {
+        return new RentalResponse(userRentalRecords.stream().map(RentalRecord::of).collect(Collectors.toList()));
     }
 }
+    //    public static RentalResponse of(List<History> userRentalRecords) {
+//        List<RentalRecord> rentalRecordList = userRentalRecords.stream().map(RentalRecord::of).collect(Collectors.toList());
+//        return new RentalResponse(rentalRecordList);
+//    }
