@@ -8,7 +8,4 @@ import lombok.Getter;
 public class BookStockRecord {
     private long userId;
     private int quantity;
-
-    public BookStockRecord() {
-    }
 }

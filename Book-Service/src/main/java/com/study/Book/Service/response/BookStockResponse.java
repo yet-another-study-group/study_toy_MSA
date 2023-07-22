@@ -1,16 +1,13 @@
 package com.study.Book.Service.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
+@NoArgsConstructor
 public class BookStockResponse {
     private List<BookStockRecord> bookStockRecords;
-
-    public BookStockResponse() {
-    }
 }
 
