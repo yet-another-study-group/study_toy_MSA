@@ -1,5 +1,8 @@
 package com.study.Book.Service;
 
+import com.study.Book.Service.feign.HistoryFeign;
+import com.study.Book.Service.repository.BookRepository;
+import com.study.Book.Service.service.BookService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
