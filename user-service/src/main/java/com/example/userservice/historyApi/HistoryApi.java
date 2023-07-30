@@ -11,6 +11,6 @@ import java.util.ArrayList;
 
 @FeignClient(name = "history-service", url = "${feign.history-service-url}", primary = false)
 public interface HistoryApi {
-    @GetMapping(value = "/api/test/member/{memberId}")
+    @GetMapping(value = "/api/histories/user/{memberId}")
     HistoryApiResponse getUserHistory(@PathVariable("memberId") long memberId);
 }

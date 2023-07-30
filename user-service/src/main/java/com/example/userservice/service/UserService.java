@@ -34,7 +34,7 @@ public class UserService {
     public RentalRightResponse checkRentalRight(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException());
         HistoryApiResponse response=historyApi.getUserHistory(user.getId());
-        int bookQuantity = countRentalBooks(response.getRentalRecords());
+        int bookQuantity = countRentalBooks(response.getUserRentalRecords());
 
         if (bookQuantity < LIMITED_RENTAL_BOOK_COUNT) {
             log.debug("대여 가능");

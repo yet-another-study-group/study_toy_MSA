@@ -9,5 +9,5 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class HistoryApiResponse {
 
-    private ArrayList<HistoryData> rentalRecords;
+    private ArrayList<HistoryData> userRentalRecords;
 }
