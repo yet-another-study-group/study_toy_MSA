@@ -1,6 +1,7 @@
 package com.example.userservice.service;
 
 import com.example.userservice.entity.User;
+import com.example.userservice.entity.UserRentalRightStatus;
 import com.example.userservice.historyApi.HistoryApi;
 import com.example.userservice.repository.UserRepository;
 import com.example.userservice.response.HistoryApiResponse;
@@ -38,10 +39,10 @@ public class UserService {
 
         if (bookQuantity < LIMITED_RENTAL_BOOK_COUNT) {
             log.debug("대여 가능");
-            return RentalRightResponse.of(true);
+            return RentalRightResponse.answerAndUserID(UserRentalRightStatus.AVAILABLE, user.getId());
         } else {
             log.debug("대여 불가능");
-            return RentalRightResponse.of(false);
+            return RentalRightResponse.answerAndUserID(UserRentalRightStatus.NOT_AVAILABLE, user.getId());
         }
     }
 

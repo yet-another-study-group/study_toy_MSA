@@ -18,15 +18,15 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user/rentalRight/{userEmail}")
-    public ApiResponse<RentalRightResponse> checkRentalRight(@PathVariable String userEmail){
+    public ResponseEntity<RentalRightResponse> checkRentalRight(@PathVariable String userEmail){
         RentalRightResponse response=userService.checkRentalRight(userEmail);
-        return ApiResponse.ok(response);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/user/registration")
-    public ApiResponse registrationUser(@Validated @RequestBody UserSignUpDto userSignUpDto){
+    public ResponseEntity registrationUser(@Validated @RequestBody UserSignUpDto userSignUpDto){
         userService.registration(userSignUpDto.getEmail(), userSignUpDto.getPassword());
-        return ApiResponse.create();
+        return ResponseEntity.ok("회원가입 성공");
     }
 
 }
