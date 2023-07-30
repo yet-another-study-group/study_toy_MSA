@@ -19,7 +19,7 @@ public class LoanService {
         AvailabilityStatus bookStatus = bookFeign.getBookRentalStatus(bookId);
         UserRentalResponse userResponse = userFeign.getUserRentalStatus(email);
 
-        if (bookStatus == AvailabilityStatus.AVAILABLE || userResponse.getRentalRight() == AvailabilityStatus.AVAILABLE) {
+        if (bookStatus == AvailabilityStatus.AVAILABLE && userResponse.getRentalRight() == AvailabilityStatus.AVAILABLE) {
             historyFeign.saveLoanRecord(userResponse.getUserId(), bookId, quantity);
             return "대여 완료";
         } else {
