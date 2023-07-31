@@ -8,7 +8,6 @@ import com.study.Book.Service.response.BookStockRecord;
 import com.study.Book.Service.response.BookStockResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -23,8 +22,8 @@ public class BookService {
 
     public BookAvailabilityStatus checkBookAvailabilityForRental(long bookId) {
         int totalStock = getTotalBookStock(bookId);
-        ResponseEntity<BookStockResponse> responseEntity = historyFeign.getBorrowedBookStock(bookId);
-        List<BookStockRecord> stockRecords = responseEntity.getBody().getBookStockRecords();
+        BookStockResponse stockResponse = historyFeign.getBorrowedBookStock(bookId);
+        List<BookStockRecord> stockRecords = stockResponse.getBookStockRecords();
         int rentedBook = stockRecords.stream()
                 .mapToInt(BookStockRecord::getQuantity)
                 .sum();
