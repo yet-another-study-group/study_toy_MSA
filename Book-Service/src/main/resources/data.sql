@@ -1,0 +1,1 @@
+INSERT INTO Book (name, author, genre, stock) VALUES ('book', 'cjy', 'aaa', 2), ('koob', 'jyc', 'bbb', 5)
